@@ -1,0 +1,32 @@
+# Spring properties
+spring:
+  application:
+     name: zuul-server
+
+# Discovery Server Access
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+# HTTP Server
+server:
+  port: 2222   # HTTP (Tomcat) port
+
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: true
+
+zuul:
+  routes:
+    cursos:
+      path: /cursos/**
+      serviceId: CURSOS-SERVICE
+    groups:
+      path: /group-service/**
+      serviceId: GROUP-SERVICE

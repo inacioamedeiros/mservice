@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Lista de Cursos</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous"/>
+</head>
+
+<body>
+
+	 <div th:replace="principal :: header"></div>
+
+     <div class="panel panel-default" style="margin: 60px">
+     
+		<div class="panel-heading">
+			<h1 class="panel-title">Curso</h1>
+		</div>
+
+		<form class="form-inline" method="POST" th:object="${curso}" th:action="@{/cursos}" style="margin: 20px 0">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}" /> 
+				<input type="text" class="form-control" placeholder="Duracao" th:field="*{duracao}" /> 
+<!-- 				<input type="text" class="form-control" placeholder="Valor Entrega" th:field="*{valorEntrega}" /> -->
+				<button type="submit" class="btn btn-primary">Adicionar</button>
+			</div>
+		</form>
+
+        <div class="panel-body">
+			<table class="table">
+				<thead>
+					<tr>
+					    <th>Nome</th>
+						<th>Duracao</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="curso : ${cursos}">
+					    <td th:text="${curso.nome}"></td>
+						<td th:text="${curso.duracao}"></td>
+<!-- 						<td th:text="${cidade.valorEntrega}"></td> -->
+						<td><a th:href="${'/excluircurso/' + curso.id}" >Excluir</a></td>
+						<td><a th:href="${'/editarcurso/' + curso}" >Alterar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
